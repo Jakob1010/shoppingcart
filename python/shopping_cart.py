@@ -2,17 +2,18 @@ from abc import ABC, abstractmethod
 
 from shopping_cart_interface import IShoppingCart
 from pricer import Pricer
+from receipt_format import ReceiptFormat
 
 
 class ShoppingCart(IShoppingCart):
     """
     Implementation of the shopping tills in our supermarket.
     """
-    def __init__(self, pricer: Pricer, recipe_format=0):
+    def __init__(self, pricer: Pricer, receipt_format=0):
         self.pricer = pricer
+        self.receipt = ReceiptFormat(receipt_format)
         self.items = []
         self.items_quantity = {}
-        self.recipe_format = recipe_format
 
 
     def add_item(self, item_type: str, number: int):
@@ -31,10 +32,7 @@ class ShoppingCart(IShoppingCart):
             price = self.pricer.get_price(item)
             total += quantity * price
 
-            if self.recipe_format == 0:
-                print(f"{item} - {quantity} - {price}")
-            else:
-                print(f"{price} - {item} - {quantity}")
+            print(self.receipt.get_receipt_line(item, quantity, price))
 
         print("Total: {total}".format(total=total))
 
