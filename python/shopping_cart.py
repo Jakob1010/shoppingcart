@@ -9,9 +9,9 @@ class ShoppingCart(IShoppingCart):
     """
     Implementation of the shopping tills in our supermarket.
     """
-    def __init__(self, pricer: Pricer, receipt_format=0):
+    def __init__(self, pricer: Pricer, receipt_format: ReceiptFormat):
         self.pricer = pricer
-        self.receipt = ReceiptFormat(receipt_format)
+        self.receipt_format = receipt_format
         self.items = []
         self.items_quantity = {}
 
@@ -32,7 +32,7 @@ class ShoppingCart(IShoppingCart):
             price = self.pricer.get_price(item)
             total += quantity * price
 
-            print(self.receipt.get_receipt_line(item, quantity, price))
+            print(self.receipt_format.get_line(item, quantity, price))
 
         print("Total: {total}".format(total=total))
 
@@ -47,10 +47,10 @@ class ShoppingCartCreator(ABC):
         # return the ShoppingCart object
         pass
 
-    def operation(self) -> ShoppingCart:
+    def operation(self, format: int = 0) -> ShoppingCart:
         # Here more operations can be performed on the ShoppingCart object
         # returns ShoppingCart object
-        return self.factory_method()
+        return self.factory_method(format)
 
 
 class ShoppingCartConcreteCreator(ShoppingCartCreator):
@@ -59,6 +59,6 @@ class ShoppingCartConcreteCreator(ShoppingCartCreator):
     Implements the factory_method
     """
 
-    def factory_method(self) -> ShoppingCart:
+    def factory_method(self, format) -> ShoppingCart:
         # returns ShoppingCart object
-        return ShoppingCart(Pricer())
+        return ShoppingCart(Pricer(), ReceiptFormat(format))
