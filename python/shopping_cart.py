@@ -15,14 +15,12 @@ class ShoppingCart(IShoppingCart):
         self.items = []
         self.items_quantity = {}
 
-
     def add_item(self, item_type: str, number: int):
         if item_type not in self.items_quantity:
             self.items.append(item_type)
             self.items_quantity[item_type] = number
         else:
             self.items_quantity[item_type] += number
-
 
     def print_receipt(self):
         total = 0
