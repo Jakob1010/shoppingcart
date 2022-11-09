@@ -12,7 +12,14 @@ In order to preserve the scan order for the receipt, the data structure was chan
 With this approach, both add_item() and print_receipt() can run in **O(n)**. 
 
 ## Allow different receipt format
-A new class **'receipt_format.py'** that takes differnt formatting codes (0,1) and automatically applies the correct format in **get_line()**
+A new class **'receipt_format.py'** that takes differnt formatting codes (0,1) and automatically applies the correct format in **get_line()** was created.
 
 ## Update test suite
 New tests were added in order to verify the changes made. Also **setUp** was used to minimize the number of tests that need to be updated when changes for the shopping_cart class are made.
+
+## Future Improvements 💡
+It took me about 3 hours for the changes mentioned above. If I had more time, the following two things would be the next things I would take care of:
+
+- clarify if updates of an item influence the order (in that case I would use a ordered dict instead of the combination of a list for the items and a dic for the quantity
+- provide more formats for the receipt e.g. showing prices also in euros and not only in cents
+
