@@ -1,6 +1,7 @@
 import unittest
 
 from shopping_cart import ShoppingCartConcreteCreator
+from receipt_format import Format
 from test_utils import Capturing
 
 
@@ -64,7 +65,8 @@ class ShoppingCartReceiptTest(unittest.TestCase):
         self.assertEqual(f"Total: {total}", output[-1])
 
     def test_print_price_first_format(self):
-        self.cart = ShoppingCartConcreteCreator().operation(1)
+        price_first = Format.PRICE_FIRST
+        self.cart = ShoppingCartConcreteCreator().operation(price_first)
         self.cart.add_item("banana", 5)
         with Capturing() as output:
             self.cart.print_receipt()

@@ -2,12 +2,16 @@ from abc import ABC, abstractmethod
 
 from shopping_cart_interface import IShoppingCart
 from pricer import Pricer
-from receipt_format import ReceiptFormat
+from receipt_format import ReceiptFormat, Format
 
 
 class ShoppingCart(IShoppingCart):
     """
-    Implementation of the shopping tills in our supermarket.
+    Implementation of the shopping tills in our supermarket..
+    ---------
+    Params:
+        - pricer: Returns price of items.
+        - receipt_format: Represents format of receipt. 
     """
     def __init__(self, pricer: Pricer, receipt_format: ReceiptFormat):
         self.pricer = pricer
@@ -45,7 +49,7 @@ class ShoppingCartCreator(ABC):
         # return the ShoppingCart object
         pass
 
-    def operation(self, format: int = 0) -> ShoppingCart:
+    def operation(self, format: Format = Format.DEFAULT) -> ShoppingCart:
         # Here more operations can be performed on the ShoppingCart object
         # returns ShoppingCart object
         return self.factory_method(format)
@@ -57,6 +61,6 @@ class ShoppingCartConcreteCreator(ShoppingCartCreator):
     Implements the factory_method
     """
 
-    def factory_method(self, format) -> ShoppingCart:
+    def factory_method(self, format: ReceiptFormat) -> ShoppingCart:
         # returns ShoppingCart object
         return ShoppingCart(Pricer(), ReceiptFormat(format))

@@ -1,17 +1,24 @@
+from enum import Enum
+
+class Format(Enum):
+    DEFAULT = 0
+    PRICE_FIRST = 1
+
+
 class ReceiptFormat:
     """
-    Defines format for receipt.
+    Defines format of receipt.
+    ---------
+    Params:
+        - format: Id of format. 
     """
-    def __init__(self, receipt_format):
-        # right now only two formats are supported
-        if receipt_format not in [0, 1]:
-            receipt_format = 0
-        self.receipt_format = receipt_format
+    def __init__(self, format):
+        self.format = format
 
     def get_line(self, item, quantity, price):
-        if self.receipt_format == 0:
+        if self.format == Format.DEFAULT:
             return (f"{item} - {quantity} - {price}")
-        elif self.receipt_format == 1:
+        elif self.format == Format.PRICE_FIRST:
             return (f"{price} - {item} - {quantity}")
         else:
             return 'invalid receipt format'

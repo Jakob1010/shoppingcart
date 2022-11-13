@@ -15,9 +15,9 @@ With this approach, add_item() can be done in constant time **O(1)** and print_r
 A new class **'receipt_format.py'** that takes differnt formatting codes (0,1) and automatically applies the correct format in **get_line()** was created.
 
 ## Update test suite
-New tests were added in order to verify the changes made. Also **setUp** was used to minimize the number of tests that need to be updated when changes for the shopping_cart class are made.
+6 New tests were added in order to verify the changes made. Also **setUp** was used to minimize the number of tests that need to be updated when changes for the shopping_cart class are made.
 
-## Future Improvements 💡
+# Future Improvements 💡
 It took me about 3 hours for the changes mentioned above. If I had more time, the following two things would be the next things I would take care of:
 
 - clarify if updates of an item influence the order (in that case I would use a ordered dict instead of the combination of a list for the items and a dic for the quantity
